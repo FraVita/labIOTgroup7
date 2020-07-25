@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>IotTech</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+    <script>
+        function visualizza_ora() {
+            let d = new Date();
+            document.getElementById("clock").innerHTML = (d.toTimeString()).substring(0, 8);
+            document.getElementById("date").innerHTML = d.toDateString();
+            //aggiorna automaticamente script
+            setTimeout("visualizza_ora()", 100);
+        }
+
+        function visualizza_temperatura() {
+            console.log("Aggiorno temperatura");
+            url = "catalog/devices/Yun_temperature/";
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function() {
+                if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                    var obj = JSON.parse(xmlHttp.response);
+                    var ind = obj["resources"].indexOf("temperature");
+                    var value = parseFloat(obj["values"][ind]);
+                    var unit = obj["units"][ind];
+                    if(ind>=0)
+                        document.getElementById("temperature").innerHTML =
+                            value.toFixed(1) + " " + unit;
+                    else
+                        document.getElementById("temperature").innerHTML = "NaN";
+                }
+            }
+            xmlHttp.open("GET", url, true); // true for asynchronous
+            xmlHttp.send(null);
+
+            //aggiorna automaticamente script
+            setTimeout("visualizza_temperatura()", 30*1000); // 30 secondi
+        }
+
+        function aggiorna_led() {
+            console.log("Aggiorno led");
+            url = "catalog/devices/all/";
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function() {
+                if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                    var obj = JSON.parse(xmlHttp.response);
+                    for(device of obj["devices"]) {
+                        deviceID = device["deviceID"]
+                        if(deviceID.includes("Led")) {
+                            if(device.values[0] == false) {
+                                if($('#toggle_'+deviceID).prop('checked')!=false)
+                                    $('#toggle_'+deviceID).bootstrapToggle('off');
+                            }
+                            else {
+                                if($('#toggle_'+deviceID).prop('checked')!=true)
+                                    $('#toggle_'+deviceID).bootstrapToggle('on');
+                            }
+                        }
+                    }
+                }
+            }
+            xmlHttp.open("GET", url, true); // true for asynchronous
+            xmlHttp.send(null);
+
+            //aggiorna automaticamente script
+            setTimeout("aggiorna_led()", 10*1000); // 10 secondi
+        }
+
+
+        $(document).ready(function() {
+            $('.toggleLed').change(function() {
+                id = $(this).prop('id').replace("toggle_","");
+                bool_value = $(this).prop('checked');
+                toggleLed(id, bool_value)
+            });
+        });
+
+        function toggleLed(id, state) {
+            payload = {
+                "deviceID": id,
+                "resources": ["illumination"],
+                "values": [state],
+                "units": [null]
+            }
+            endpoint = "catalog/update"
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function() {
+                if (xmlHttp.readyState == 4 && xmlHttp.status >= 400) {
+                    $('#toggle_'+id).bootstrapToggle('toggle');
+                }
+            }
+            xmlHttp.open("PUT", endpoint, true); // true for asynchronous
+            xmlHttp.send(JSON.stringify(payload));
+        }
+
+
+        function run() {
+            visualizza_ora();
+            visualizza_temperatura();
+            aggiorna_led();
+        }
+    </script>
+</head>
+<body onload="run()">
+
+<h1>IotTech</h1>
+<hr>
+<div class="container">
+    <div class="row">
+        <div id="date" class="col-sm-4 digital border border-dark rounded"></div>
+        <div id="clock" class="col-sm-4 digital border border-dark rounded"></div>
+        <div id="temperature" class="col-sm-4 digital border border-dark rounded"><span id=temp_value></span> °C</div>
+    </div>
+    <hr>
+    <h2>Led controller</h2>
+    <div class="row">
+        <div id="led1" class="col-sm-4 border border-dark rounded">
+            <p class="digital">LED 1</p>
+            <input id="toggle_Led1" class="toggleLed" type="checkbox" checked data-toggle="toggle" data-onstyle="primary" onclick="toggleLed('Led1');">
+        </div>
+        <div id="led2" class="col-sm-4 border border-dark rounded">
+            <p class="digital">LED 2</p>
+            <input id="toggle_Led2" class="toggleLed" type="checkbox" checked data-toggle="toggle" data-onstyle="success" onclick="toggleLed('Led2');">
+        </div>
+        <div id="led3" class="col-sm-4 border border-dark rounded">
+            <p class="digital">LED 3</p>
+            <input id="toggle_Led3" class="toggleLed" type="checkbox" checked data-toggle="toggle" data-onstyle="warning" onclick="toggleLed('Led3');">
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

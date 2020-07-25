@@ -1,0 +1,60 @@
+{
+    "devices": [
+        {
+            "deviceID": "Led1",
+            "resources": [
+                "illumination"
+            ],
+            "values": [
+                true
+            ],
+            "units": [
+                null
+            ],
+            "insert-timestamp": 1595668706.857304
+        },
+        {
+            "deviceID": "Led2",
+            "resources": [
+                "illumination"
+            ],
+            "values": [
+                false
+            ],
+            "units": [
+                null
+            ],
+<<<<<<< HEAD
+            "insert-timestamp": 1595668943.7350411
+=======
+            "insert-timestamp": 1595669056.438785
+>>>>>>> 8b46cbb7959efc65a3158775834aff4c4af4c9b3
+        },
+        {
+            "deviceID": "Led3",
+            "resources": [
+                "illumination"
+            ],
+            "values": [
+                true
+            ],
+            "units": [
+                null
+            ],
+            "insert-timestamp": 1595668943.629567
+        },
+        {
+            "deviceID": "Yun_temperature",
+            "resources": [
+                "temperature"
+            ],
+            "values": [
+                24.55347
+            ],
+            "units": [
+                "\u00b0C"
+            ],
+            "insert-timestamp": 1594981861.0259142
+        }
+    ]
+}

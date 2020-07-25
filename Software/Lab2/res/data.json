@@ -1,0 +1,62 @@
+{
+    "broker": {
+        "address": "mqtt.eclipse.org",
+        "port": 1883
+    },
+    "devices": [
+        {
+            "deviceID": "aWoyb",
+            "endpoints": "provaMQTT",
+            "resources": [
+                "motion-sensor"
+            ],
+            "insert-timestamp": 1595346866.091122
+        },
+        {
+            "deviceID": "Yun-IoT_Tech-Group7",
+            "endpoints": [
+                "192.168.1.6"
+            ],
+            "resources": [
+                "temperature"
+            ],
+            "insert-timestamp": 1595436571.714595
+        }
+    ],
+    "users": [
+        {
+            "userID": "userIDtest",
+            "name": "Mario",
+            "surname": "Rossi",
+            "email": [
+                "mario.rossi@gmail.com"
+            ]
+        },
+        {
+            "userID": "userIDtestblabla",
+            "name": "Mario",
+            "surname": "Rossi",
+            "email": [
+                "mario.rossi@gmail.com"
+            ]
+        }
+    ],
+    "services": [
+        {
+            "serviceID": "tempServiceREST",
+            "description": "Temperature sent with POST request",
+            "endpoints": [
+                "/temperature/value"
+            ],
+            "insert-timestamp": 1595436571.7145972
+        },
+        {
+            "serviceID": "tempServiceMQTT",
+            "description": "Temperature on eclipse broker",
+            "endpoints": [
+                "mqtt.eclipse.org"
+            ],
+            "insert-timestamp": 1595436571.7145972
+        }
+    ]
+}

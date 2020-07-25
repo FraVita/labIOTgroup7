@@ -1,0 +1,13 @@
+@font-face {
+    font-family: Digital;
+    src: url('digital-7.ttf');
+}
+
+body {
+    text-align: center;
+}
+
+.digital {
+    font-family: Digital;
+    font-size: 2em;
+}

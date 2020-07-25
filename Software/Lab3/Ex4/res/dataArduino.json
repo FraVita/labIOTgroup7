@@ -1,0 +1,25 @@
+{
+  "device": {
+      "deviceID": "Yun-IoT_Tech-Group7",
+      "endpoints": [
+          "/temperature/value"
+      ],
+      "insert-timestamp": 1595603637.995855
+  },
+  "services": [
+      {
+          "serviceID": "tempServiceREST",
+          "description": "Temperature sent with POST request",
+          "endpoints": [
+              "/temperature/value"
+          ]
+      },
+      {
+          "serviceID": "tempServiceMQTT",
+          "description": "Temperature on eclipse broker",
+          "endpoints": [
+              "mqtt.eclipse.org"
+          ]
+      }
+  ]
+}

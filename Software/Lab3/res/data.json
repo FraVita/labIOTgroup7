@@ -1,0 +1,46 @@
+{
+    "broker": {
+        "address": "mqtt.eclipse.org",
+        "port": 1883
+    },
+    "devices": [
+        {
+            "deviceID": "Yun-IoT_Tech-Group7",
+            "endpoints": [
+                "/temperature/value",
+                "/movement/value",
+                "sound/value"
+            ],
+            "resources": [
+                "temperature",
+                "movement",
+                "sound"
+            ],
+            "insert-timestamp": 1595595736.219952
+        }
+    ],
+    "users": [
+        {
+            "userID": "userIDtest",
+            "name": "Mario",
+            "surname": "Rossi",
+            "email": [
+                "mario.rossi@gmail.com"
+            ]
+        },
+        {
+            "userID": "userIDtestblabla",
+            "name": "Mario",
+            "surname": "Rossi",
+            "email": [
+                "mario.rossi@gmail.com"
+            ]
+        }
+    ],
+    "services": [
+        {
+            "serviceID": "Temp",
+            "insert-timestamp": 1595595736.219954
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+  "device": {
+        "deviceID": "Yun-IoT_Tech-Group7",
+        "endpoints": "192.168.1.6",
+        "resources": [
+            "temperature"
+        ]
+  },
+  "services": [
+      {
+          "serviceID": "tempServiceREST",
+          "description": "Temperature sent with POST request",
+          "endpoints": [
+              "/temperature/value"
+          ]
+      },
+      {
+          "serviceID": "tempServiceMQTT",
+          "description": "Temperature on eclipse broker",
+          "endpoints": [
+              "mqtt.eclipse.org"
+          ]
+      }
+  ]
+}

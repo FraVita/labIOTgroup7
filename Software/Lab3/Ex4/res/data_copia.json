@@ -1,0 +1,50 @@
+{
+    "broker": {
+        "address": "test.mosquitto.org",
+        "port": 1883
+    },
+    "devices": [
+        {
+            "deviceID": "deviceIDtest",
+            "endpoints": [
+                "endpointTest"
+            ],
+            "resources": [
+                "temperature",
+                "humidity"
+            ],
+            "insert-timestamp": 1591288320
+        },
+        {
+            "deviceID": "pippo",
+            "endpoints": [
+                "endpointTestseh"
+            ],
+            "resources": [
+                "temperature",
+                "humidity"
+            ],
+            "insert-timestamp": 1591286967.220171
+        }
+    ],
+    "users": [
+        {
+            "userID": "userIDtest",
+            "name": "Mario",
+            "surname": "Rossi",
+            "email": [
+                "mario.rossi@gmail.com"
+            ]
+        }
+    ],
+    "services": [
+        {
+            "serviceID": "serviceIDtest",
+            "description": "A simple service.",
+            "endpoints": [
+                "endpointTest"
+            ],
+            "insert-timestamp": 1591288420
+        }
+    ]
+}
